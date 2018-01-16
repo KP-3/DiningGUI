@@ -73,7 +73,7 @@ public class Searchplus extends JPanel {
         int Dy = 700;
         int Et = 450;
         int Ey = 250;
-        
+
         int philosopherNum = GraphFrame.philosopherNum; // 哲学者の人数を取得
 
         // 哲学者の配置
@@ -93,69 +93,13 @@ public class Searchplus extends JPanel {
 
         // フォークの配置
 
-
-//        g2.drawOval(At, Ay, 80, 80);
-//        g2.drawOval(Bt, By, 80, 80);
-//        g2.drawOval(Ct, Cy, 80, 80);
-//        g2.drawOval(Dt, Dy, 80, 80);
-//        g2.drawOval(Et, Ey, 80, 80);
-//        g2.drawString("A", At, Ay);
-//        g2.drawString("B", Bt, By);
-//        g2.drawString("C", Ct, Cy);
-//        g2.drawString("D", Dt, Dy);
-//        g2.drawString("E", Et, Ey);
-
-        int i = 0;
-
         for (Object s : tableforkstate) {
             String t = (String) s;
             int tableforknumber = Integer.parseInt(t);
 
             //テーブル
             g3.drawString("ψ", (int) (circlet - 20 + 200 * Math.cos(Math.toRadians((360 * tableforknumber) / philosopherNum - 90 - (360 / (2 * philosopherNum))))), (int) (circley + 15 + 200 * Math.sin(Math.toRadians((360 * tableforknumber) / philosopherNum - 90 - (360 / (2 * philosopherNum))))));
-
-
-            //           g4.drawString("Ψ",(int)(20 * Math.cos(Math.toRadians(360*tableforknumber)/philosopherNum + 90) + 300 * Math.cos(Math.toRadians(360*tableforknumber)/philosopherNum)+500),(int)(20 * Math.sin(Math.toRadians(360*tableforknumber)/philosopherNum + 90) + 300 * Math.sin(Math.toRadians(360*tableforknumber)/philosopherNum)+250));
-
-//            switch (Integer.parseInt(t)) {
-//                case 1:
-//                    g4.drawString("ψ", 800, 300);
-//
-//                    break;
-//                case 2:
-//                    g4.drawString("ψ", 850, 450);
-//
-//                    break;
-//                case 3:
-//                    g4.drawString("ψ", 700, 600);
-//
-//                    break;
-//                case 4:
-//                    g4.drawString("ψ", 600, 450);
-//
-//                    break;
-//                case 5:
-//                    g4.drawString("ψ", 650, 300);
-//
-//                    break;
-//
-//            }
-
         }
-
-        //フォーク,食事の描画テスト
-        for (int j = 0; j < philosopherNum; j++) {
-            //右手
-//            g3.drawString("ψ", (int) (20 * Math.cos(Math.toRadians(360 * j / philosopherNum - 90 - 90)) + circlet - 10 + 265 * Math.cos(Math.toRadians((360 * j) / philosopherNum - 90))), (int) (20 * Math.sin(Math.toRadians(360 * j / philosopherNum - 90 - 90)) + circley + 10 + 265 * Math.sin(Math.toRadians((360 * j) / philosopherNum - 90))));
-            //左手
-//            g3.drawString("ψ", (int) (20 * Math.cos(Math.toRadians(360 * j / philosopherNum - 90 + 90)) + circlet - 10 + 265 * Math.cos(Math.toRadians((360 * j) / philosopherNum - 90))), (int) (20 * Math.sin(Math.toRadians(360 * j / philosopherNum - 90 + 90)) + circley + 10 + 265 * Math.sin(Math.toRadians((360 * j) / philosopherNum - 90))));
-            //食事
-//            g3.drawString("♨", (int) (circlet - 20 + 200 * Math.cos(Math.toRadians((360 * j) / philosopherNum - 90))), (int) (circley + 15 + 200 * Math.sin(Math.toRadians((360 * j) / philosopherNum - 90))));
-            //テーブル
-//            g3.drawString("ψ", (int) (circlet - 20 + 200 * Math.cos(Math.toRadians((360 * j) / philosopherNum - 90 - (360 / (2 * philosopherNum))))), (int) (circley + 15 + 200 * Math.sin(Math.toRadians((360 * j) / philosopherNum - 90 - (360 / (2 * philosopherNum))))));
-
-        }
-
 
         for (Object s : rightstate) {
             String t = (String) s;
@@ -163,14 +107,6 @@ public class Searchplus extends JPanel {
 
             //右手
             g3.drawString("ψ", (int) (20 * Math.cos(Math.toRadians(360 * rightnumber / philosopherNum - 90 - 90)) + circlet - 10 + 265 * Math.cos(Math.toRadians((360 * rightnumber) / philosopherNum - 90))), (int) (20 * Math.sin(Math.toRadians(360 * rightnumber / philosopherNum - 90 - 90)) + circley + 10 + 265 * Math.sin(Math.toRadians((360 * rightnumber) / philosopherNum - 90))));
-
-//            if (t.equals("A")) g3.drawString("ψ", At - 20, Ay + 100);
-//            if (t.equals("B")) g3.drawString("ψ", Bt - 10, By + 40);
-//            if (t.equals("C")) g3.drawString("ψ", Ct + 20, Cy - 10);
-//            if (t.equals("D")) g3.drawString("ψ", Dt + 60, Dy + 10);
-//            if (t.equals("E")) g3.drawString("ψ", Et + 50, Ey + 70);
-
-
         }
 
         for (Object s : leftstate) {
@@ -179,13 +115,6 @@ public class Searchplus extends JPanel {
 
             //左手
             g3.drawString("ψ", (int) (20 * Math.cos(Math.toRadians(360 * leftnumber / philosopherNum - 90 + 90)) + circlet - 10 + 265 * Math.cos(Math.toRadians((360 * leftnumber) / philosopherNum - 90))), (int) (20 * Math.sin(Math.toRadians(360 * leftnumber / philosopherNum - 90 + 90)) + circley + 10 + 265 * Math.sin(Math.toRadians((360 * leftnumber) / philosopherNum - 90))));
-
-
-//            if (t.equals("A")) g3.drawString("ψ", At + 60, Ay + 100);
-//            if (t.equals("B")) g3.drawString("ψ", Bt + 25, By + 70);
-//            if (t.equals("C")) g3.drawString("ψ", Ct - 20, Cy + 10);
-//            if (t.equals("D")) g3.drawString("ψ", Dt - 10, Dy - 10);
-//            if (t.equals("E")) g3.drawString("ψ", Et + 60, Ey + 40);
         }
 
         g4.setFont(font2);
@@ -195,13 +124,6 @@ public class Searchplus extends JPanel {
 
             //食事
             g3.drawString("♨", (int) (circlet - 20 + 200 * Math.cos(Math.toRadians((360 * eatnumber) / philosopherNum - 90))), (int) (circley + 15 + 200 * Math.sin(Math.toRadians((360 * eatnumber) / philosopherNum - 90))));
-
-
-//            if (t.equals("A")) g3.drawString("♨", At + 20, Ay + 150);
-//            if (t.equals("B")) g3.drawString("♨", Bt - 80, By + 100);
-//            if (t.equals("C")) g3.drawString("♨", Ct - 50, Cy - 50);
-//            if (t.equals("D")) g3.drawString("♨", Dt + 50, Dy - 50);
-//            if (t.equals("E")) g3.drawString("♨", Et + 100, Ey + 100);
         }
 
     }
