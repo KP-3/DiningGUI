@@ -73,9 +73,8 @@ public class Searchplus extends JPanel {
         int Dy = 700;
         int Et = 450;
         int Ey = 250;
-
-        int philosopherNum = 5; // 哲学者の人数を取得
-        philosopherNum = GraphFrame.philosopherNum;
+        
+        int philosopherNum = GraphFrame.philosopherNum; // 哲学者の人数を取得
 
         // 哲学者の配置
         for (int i = 0; i < philosopherNum; i++) {
