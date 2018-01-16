@@ -48,46 +48,27 @@ public class Planner {
         Matcher mat2 = pat2.matcher(plan1);
         Pattern pat3 = Pattern.compile("pick up fork (.+) from the table for philosopher (.+) 's (.+) hand");
         Matcher mat3 = pat3.matcher(plan1);
-        if (mat1.find()) {//Place x on y
+        
+        if (mat1.find()) { // Eating philosopher (.+)
             String x = mat1.group(1);
-
-            //		String check = "clear " + y;
-            //		String check1 = "holding " + x;
-            for (int j = 0; j < now.size(); j++) {//delete
+            
+            for (int j = 0; j < now.size(); j++) { // delete
                 String a = (String) now.get(j);
                 boolean flag = true;
-    /*			
-                if (a.equals(check)) {
-					flag = false;
-				}
-				if (a.equals(check1)) {
-					flag = false;
-				}
-		*/
                 if (flag) {
                     re.addElement(a);
                 }
             }
             hold = "";
-            /*
-			for (int i = 0; i < namelist.size(); i++) {
-				ArrayList<String> memo = namelist.get(i);
-				if (memo.contains(y)) {
-					memo.add(x);
-				}
-				namelist.remove(i);
-				namelist.add(i, memo);
-				*/
-            //add
+            // add
             re.addElement("philosopher " + x + " is eating");
 //			System.out.println("1");
-        } else if (mat2.find()) {//put fork (.+) down on the table for philosopher (.+) 's (.+) hand
+        } else if (mat2.find()) { // put fork (.+) down on the table for philosopher (.+) 's (.+) hand
             String x = mat2.group(1);
             String y = mat2.group(2);
             String z = mat2.group(3);
 
             String check = "philosopher " + y + " has fork " + x + " on the " + z + " hand";
-
 
             for (int j = 0; j < now.size(); j++) {//delete
                 String a = (String) now.get(j);
@@ -102,32 +83,17 @@ public class Planner {
                 }
             }
             hold = y;
-			/*
-			for (int i = 0; i < namelist.size(); i++) {
-				ArrayList<String> memo = namelist.get(i);
-				if (memo.contains(y)) {
-					for (int j = 0; j < memo.size(); j++) {
-						String s = memo.get(j);
-						if (s.equals(x)) {
-							memo.remove(j);
-						}
-					}
-				}
-				namelist.remove(i);
-				namelist.add(i, memo);}
-				*/
             //add
             re.addElement("philosopher " + y + " has nothing on the " + z + " hand");
             re.addElement("ontable fork " + x);
 //			System.out.println("2");
-        } else if (mat3.find()) {//pick up fork (.+) from the table for philosopher (.+) 's (.+) hand
+        } else if (mat3.find()) { // pick up fork (.+) from the table for philosopher (.+) 's (.+) hand
             String x = mat3.group(1);
             String y = mat3.group(2);
             String z = mat3.group(3);
 
             String check = "philosopher " + y + " has nothing on the " + z + " hand";
             String check1 = "ontable fork " + x;
-
 
             for (int j = 0; j < now.size(); j++) {//delete
                 String a = (String) now.get(j);
@@ -145,15 +111,6 @@ public class Planner {
                 }
             }
             hold = x;
-			/*
-			for (int i = 0; i < namelist.size(); i++) {
-				ArrayList<String> memo = namelist.get(i);
-				if (memo.contains(x)) {
-					memo.remove(0);
-				}
-				namelist.remove(i);
-				namelist.add(i, memo);
-			}*/
             //add
             re.addElement("philosopher " + y + " has fork " + x + " on the " + z + " hand");
 //			System.out.println("3");
@@ -279,91 +236,6 @@ public class Planner {
 
     }
 
-    /*
-    public static boolean checkOrder(Vector nowState, String op) {
-        Pattern pat1 = Pattern.compile("Place (.+) on (.+)");
-        Matcher mat1 = pat1.matcher(op);
-        Pattern pat2 = Pattern.compile("remove (.+) from on top (.+)");
-        Matcher mat2 = pat2.matcher(op);
-        Pattern pat3 = Pattern.compile("pick up (.+) from the table");
-        Matcher mat3 = pat3.matcher(op);
-        Pattern pat4 = Pattern.compile("put (.+) down on the table");
-        Matcher mat4 = pat4.matcher(op);
-        if (mat1.find()) {
-            String x = mat1.group(1);
-            String y = mat1.group(2);
-            String check1 = "clear " + y;
-            String check2 = "holding " + x;
-            boolean flag1 = false;
-            boolean flag2 = false;
-            for (int j = 0; j < nowState.size(); j++) {
-                String a = (String) nowState.get(j);
-                if (a.equals(check1)) {
-                    flag1 = true;
-                }
-                if (a.equals(check2)) {
-                    flag2 = true;
-                }
-            }
-            return flag1 && flag2;
-        } else if (mat2.find()) {
-            String x = mat2.group(1);
-            String y = mat2.group(2);
-            String check1 = x + " on " + y;
-            String check2 = "clear " + x;
-            String check3 = "handEmpty";
-            boolean flag1 = false;
-            boolean flag2 = false;
-            boolean flag3 = false;
-            for (int j = 0; j < nowState.size(); j++) {
-                String a = (String) nowState.get(j);
-                if (a.equals(check1)) {
-                    flag1 = true;
-                }
-                if (a.equals(check2)) {
-                    flag2 = true;
-                }
-                if (a.equals(check3)) {
-                    flag3 = true;
-                }
-            }
-            return flag1 && flag2 && flag3;
-        } else if (mat3.find()) {
-            String x = mat3.group(1);
-            String check1 = "ontable " + x;
-            String check2 = "clear " + x;
-            String check3 = "handEmpty";
-            boolean flag1 = false;
-            boolean flag2 = false;
-            boolean flag3 = false;
-            for (int j = 0; j < nowState.size(); j++) {
-                String a = (String) nowState.get(j);
-                if (a.equals(check1)) {
-                    flag1 = true;
-                }
-                if (a.equals(check2)) {
-                    flag2 = true;
-                }
-                if (a.equals(check3)) {
-                    flag3 = true;
-                }
-            }
-            return flag1 && flag2 && flag3;
-        } else if (mat4.find()) {
-            String x = mat4.group(1);
-            String check1 = "holding " + x;
-            boolean flag1 = false;
-            for (int j = 0; j < nowState.size(); j++) {
-                String a = (String) nowState.get(j);
-                if (a.equals(check1)) {
-                    flag1 = true;
-                }
-            }
-            return flag1;
-        }
-        return false;
-    }
-    */
 
     public static boolean checkOrder(Vector nowState, String op) {
         Pattern pat1 = Pattern.compile("Eating philosopher (.+)");
@@ -740,108 +612,7 @@ public class Planner {
         Vector onGoalList = new Vector();
         Vector otherList = new Vector();
         Vector finalGoalList = new Vector();
-/*
-		for (Object s : goalList) {
-			String str = (String) s;
-			String[] tmp = str.split(" ", 0);
-			if (tmp.length == 3) {
-				onGoalList.addElement(s);
-			} else {
-				otherList.addElement(s);
-			}
-		}
-		boolean handEmpty = false;
-		for (Object s : otherList) {
-			if (Objects.equals("handEmpty", s)) {
-				handEmpty = true;
-			}
-		}
-		if (handEmpty)
-			for (Object s : otherList) {
-				String str = (String) s;
-				String[] tmp = str.split(" ", 0);
-				if (Objects.equals("holding", tmp[0])) {
-					System.out.println("ERROR OCCURED");
-					System.exit(0);
-				}
-			}
-		// System.out.println(onGoalList);
 
-		Map<String, Integer> m = new HashMap<String, Integer>();
-		// Java7以降なら new HashMap<>() でOK
-
-		for (Object s : onGoalList) {
-			String str = (String) s;
-			String[] tmp = str.split(" ", 0);
-			for (String t : tmp) {
-
-				int v;
-				if (m.containsKey(t)) {
-					// Mapに登録済み
-					v = m.get(t) + 1;
-				} else {
-					// Mapに未登録
-					v = 1;
-				}
-				m.put((String) t, v);
-			}
-		}
-		// System.out.println(m);
-		Vector oneList = new Vector();
-		int onecount = 0;
-		for (String key : m.keySet()) {
-			// System.out.println(m.get(key));
-			if (m.get(key) == 1) {
-				oneList.add(key);
-				onecount++;
-			}
-		}
-		if (onecount > 2) {
-			System.out.println("ERROR OCCURED");
-			System.exit(0);
-		}
-		String first = "";
-		String last = "";
-
-		// System.out.println(oneList);
-		for (Object s : onGoalList) {
-			String str = (String) s;
-			String[] tmp = str.split(" ", 0);
-			if (oneList.indexOf(tmp[2]) > -1) {
-				finalGoalList.add(s);
-				last = tmp[0];
-				oneList.remove(oneList.indexOf(tmp[2]));
-				first = (String) oneList.get(0);
-			}
-
-		}
-		// System.out.println("first="+first);
-		// System.out.println("last="+last);
-		String x = "";
-		do {
-			for (Object s : onGoalList) {
-				String str = (String) s;
-				String[] tmp = str.split(" ", 0);
-				// System.out.println(s);
-				// System.out.print(tmp[2]+',');
-				// System.out.println(last);
-
-				if (Objects.equals(tmp[2], last)) {
-					finalGoalList.add(s);
-					last = tmp[0];
-					x = tmp[0];
-					// System.out.println("first="+first);
-					// System.out.println("last="+last);
-
-				}
-
-			}
-		} while (!Objects.equals(first, x));
-
-		goalList.clear();
-		goalList.addAll(finalGoalList);
-		goalList.addAll(otherList);
-*/
         return goalList;
 
     }
@@ -887,122 +658,7 @@ public class Planner {
         }
         return initialState;
     }
-
-    /*
-    private static void initOperators() {
-        operators = new Vector();
-
-        // OPERATOR 1
-        // / NAME
-        String name1 = new String("Eating philosopher A");
-
-        /// IF
-        Vector ifList1 = new Vector();
-        ifList1.addElement(new String("philosopher A has fork 1 on the left hand"));
-        ifList1.addElement(new String("philosopher A has fork 5 on the right hand"));
-        /// ADD-LIST
-        Vector addList1 = new Vector();
-        addList1.addElement(new String("philosopher A is eating"));
-        /// DELETE-LIST
-        Vector deleteList1 = new Vector();
-        Operator operator1 =
-                new Operator(name1, ifList1, addList1, deleteList1);
-        operators.addElement(operator1);
-
-        String name4 = new String("Eating philosopher B");
-        /// IF
-        Vector ifList4 = new Vector();
-        ifList4.addElement(new String("philosopher B has fork 2 on the left hand"));
-        ifList4.addElement(new String("philosopher B has fork 1 on the right hand"));
-        /// ADD-LIST
-        Vector addList4 = new Vector();
-        addList4.addElement(new String("philosopher B is eating"));
-        /// DELETE-LIST
-        Vector deleteList4 = new Vector();
-        Operator operator4 =
-                new Operator(name4, ifList4, addList4, deleteList4);
-        operators.addElement(operator4);
-
-        String name5 = new String("Eating philosopher C");
-        /// IF
-        Vector ifList5 = new Vector();
-        ifList5.addElement(new String("philosopher C has fork 3 on the left hand"));
-        ifList5.addElement(new String("philosopher C has fork 2 on the right hand"));
-        /// ADD-LIST
-        Vector addList5 = new Vector();
-        addList5.addElement(new String("philosopher C is eating"));
-        /// DELETE-LIST
-        Vector deleteList5 = new Vector();
-        Operator operator5 =
-                new Operator(name5, ifList5, addList5, deleteList5);
-        operators.addElement(operator5);
-
-        String name6 = new String("Eating philosopher D");
-        /// IF
-        Vector ifList6 = new Vector();
-        ifList6.addElement(new String("philosopher D has fork 4 on the left hand"));
-        ifList6.addElement(new String("philosopher D has fork 3 on the right hand"));
-        /// ADD-LIST
-        Vector addList6 = new Vector();
-        addList6.addElement(new String("philosopher D is eating"));
-        /// DELETE-LIST
-        Vector deleteList6 = new Vector();
-        Operator operator6 =
-                new Operator(name6, ifList6, addList6, deleteList6);
-        operators.addElement(operator6);
-
-        String name7 = new String("Eating philosopher E");
-        /// IF
-        Vector ifList7 = new Vector();
-        ifList7.addElement(new String("philosopher E has fork 5 on the left hand"));
-        ifList7.addElement(new String("philosopher E has fork 4 on the right hand"));
-        /// ADD-LIST
-        Vector addList7 = new Vector();
-        addList7.addElement(new String("philosopher E is eating"));
-        /// DELETE-LIST
-        Vector deleteList7 = new Vector();
-        Operator operator7 =
-                new Operator(name7, ifList7, addList7, deleteList7);
-        operators.addElement(operator7);
-        // OPERATOR 2
-        /// NAME
-        String name2 = new String("put fork ?y down on the table for philosopher ?x 's ?a hand");
-        /// IF
-        Vector ifList2 = new Vector();
-        ifList2.addElement(new String("philosopher ?x has fork ?y on the ?a hand"));
-        /// ADD-LIST
-        Vector addList2 = new Vector();
-        addList2.addElement(new String("philosopher ?x has nothing on the ?a hand"));
-        addList2.addElement(new String("ontable fork ?y"));
-        /// DELETE-LIST
-        Vector deleteList2 = new Vector();
-        deleteList2.addElement(new String("philosopher ?x has fork ?y on the ?a hand"));
-
-        Operator operator2 =
-                new Operator(name2, ifList2, addList2, deleteList2);
-
-        operators.addElement(operator2);
-        // OPERATOR 3
-        /// NAME
-        String name3 = new String("pick up fork ?y from the table for philosopher ?x 's ?a hand");
-        /// IF
-        Vector ifList3 = new Vector();
-        ifList3.addElement(new String("ontable fork ?y"));
-        ifList3.addElement(new String("philosopher ?x has nothing on the ?a hand"));
-        /// ADD-LIST
-        Vector addList3 = new Vector();
-        addList3.addElement(new String("philosopher ?x has fork ?y on the ?a hand"));
-        /// DELETE-LIST
-        Vector deleteList3 = new Vector();
-        deleteList3.addElement(new String("ontable fork ?y"));
-        deleteList3.addElement(new String("philosopher ?x has nothing on the ?a hand"));
-        Operator operator3 =
-                new Operator(name3, ifList3, addList3, deleteList3);
-        operators.addElement(operator3);
-
-    }
-    */
-
+    
     private static int countPhilosopherNum(String fileName) {
         int philosopherCnt = 0; // 哲学者の人数をカウント
 
