@@ -41,7 +41,7 @@ public class GraphFrame extends JFrame implements ActionListener {
     JTextArea as = new JTextArea(10, 10);
     JButton assave = new JButton("save");
     JButton asload = new JButton("load");
-    JTextField asfilename = new JTextField(30);
+    static JTextField asfilename = new JTextField(30);
     JTextField rulefilename = new JTextField(40);
     // saveボタン
     JButton rulesave = new JButton("save");

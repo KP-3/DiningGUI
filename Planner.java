@@ -686,7 +686,8 @@ public class Planner {
     }
 
     private static void initOperators() {
-        String fileName = "state.txt";
+//        String fileName = "state.txt";
+        String fileName = GraphFrame.asfilename.getText();
         int num = countPhilosopherNum(fileName);
         operators = new Vector();
 
