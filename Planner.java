@@ -24,6 +24,7 @@ public class Planner {
     static Hashtable re = new Hashtable();
     static ArrayList<String> name = new ArrayList<String>();
     static ArrayList<ArrayList<String>> namelist = new ArrayList<ArrayList<String>>();
+    static String asfilename;
 
     public static void main(String argv[]) {
         (new Planner()).start();/*
@@ -186,6 +187,7 @@ public class Planner {
 
     public static void start2(String infile, String goalfile) {
         rand = new Random();
+        asfilename = infile;
         initOperators();
         Vector goalList = initGoalListfile(goalfile);
         Vector initialState = initInitialStatefile(infile);
@@ -687,7 +689,8 @@ public class Planner {
 
     private static void initOperators() {
 //        String fileName = "state.txt";
-        String fileName = GraphFrame.asfilename.getText();
+//        String fileName = GraphFrame.asfilename.getText();
+    	String fileName = asfilename;
         int num = countPhilosopherNum(fileName);
         operators = new Vector();
 
